@@ -1,0 +1,9 @@
+!data/
+data/*
+!data/ControlGui/
+node_modules/
+*.log
+*.exe
+*.txt
+*.png
+*.jpg

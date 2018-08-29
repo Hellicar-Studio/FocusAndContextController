@@ -1,0 +1,19 @@
+{
+  "name": "focusandcontextcontrol",
+  "version": "1.0.0",
+  "description": "control app for FocusAndContext",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Hellicar-Studio/FocusAndContextController.git"
+  },
+  "author": "Bentleyj",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Hellicar-Studio/FocusAndContextController/issues"
+  },
+  "homepage": "https://github.com/Hellicar-Studio/FocusAndContextController#readme"
+}
