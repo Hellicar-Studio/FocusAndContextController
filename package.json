@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/Hellicar-Studio/FocusAndContextController/issues"
   },
-  "homepage": "https://github.com/Hellicar-Studio/FocusAndContextController#readme"
+  "homepage": "https://github.com/Hellicar-Studio/FocusAndContextController#readme",
+  "dependencies": {
+    "pm2": "^3.0.4"
+  }
 }
