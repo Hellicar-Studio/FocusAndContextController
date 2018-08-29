@@ -1,4 +1,6 @@
 var pm2 = require('pm2');
+var express = require('express');
+var app = express();
 
 /* --------------------------------------------------------------------------- */
 
@@ -8,7 +10,13 @@ pm2.connect(function(err) {
 		process.exit(2);
 	}
 	launchFandCApp();
+
+	app.listen(1555, function() {
+		console.log('Listening on port 1555!');
+	});
 });
+
+/* --------------------------------------------------------------------------- */
 
 function launchFandCApp() {
 	pm2.start({
