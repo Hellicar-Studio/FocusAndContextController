@@ -21,7 +21,7 @@ pm2.connect(function(err) {
 function launchFandCApp() {
 	pm2.start({
 		name: "Focus And Context",
-		script: "~/Documents/openFrameworksNightly/apps/FocusAndContext/cove/bin/coveDebug.app/Contents/MacOS/coveDebug",
+		script: "cove.app/Contents/MacOS/cove",
 		exec_mode: "fork",
 		instances: "1",
 		interpreter: "none",
