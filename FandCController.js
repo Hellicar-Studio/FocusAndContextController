@@ -21,7 +21,11 @@ pm2.connect(function(err) {
 function launchFandCApp() {
 	pm2.start({
 		name: "Focus And Context",
-		script: "cove.app/Contents/MacOS/cove",
+		script: "coveDebug.app/Contents/MacOS/coveDebug",
+		args: 	[
+					"hide-mouse",
+					"flip-mouse"
+				],	
 		exec_mode: "fork",
 		instances: "1",
 		interpreter: "none",
@@ -29,6 +33,8 @@ function launchFandCApp() {
 	}, function(err, proc) {
 		if(err) {
 			throw err;
+		} else {
+			console.log(proc);
 		}
 		pm2.disconnect();
 	});
