@@ -1,6 +1,7 @@
 var pm2 = require('pm2');
 var express = require('express');
 var app = express();
+var nodeCleanup = require('node-cleanup');
 
 /* --------------------------------------------------------------------------- */
 
@@ -9,18 +10,29 @@ pm2.connect(function(err) {
 		console.log(err)
 		process.exit(2);
 	}
-	launchFandCApp();
+	launchApp();
 
 	app.listen(1555, function() {
 		console.log('Listening on port 1555!');
 	});
 });
 
+nodeCleanup(function (exitCode, signal) {
+	if(signal) {
+		console.log(signal);
+		pm2.delete("DiscoverInfrastructure", function(err) {
+			console.log("Test");
+		});
+		nodeCleanup.uninstall();
+		return false;
+	}
+});
+
 /* --------------------------------------------------------------------------- */
 
-function launchFandCApp() {
+function launchApp() {
 	pm2.start({
-		name: "Focus And Context",
+		name: "DiscoverInfrastructure",
 		script: "coveDebug.app/Contents/MacOS/coveDebug",
 	  	args: 	[
 					"hide-mouse",
