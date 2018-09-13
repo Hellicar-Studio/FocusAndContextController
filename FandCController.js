@@ -22,7 +22,7 @@ function launchFandCApp() {
 	pm2.start({
 		name: "Focus And Context",
 		script: "coveDebug.app/Contents/MacOS/coveDebug",
-		args: 	[
+	  	args: 	[
 					"hide-mouse",
 					"flip-mouse"
 				],	
