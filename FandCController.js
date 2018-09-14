@@ -43,7 +43,15 @@ nodeCleanup(function (exitCode, signal) {
 
 function scheduleShutdown(date) {
 	var shutdownJob = schedule.scheduleJob(date, closeApp);
-	console.log('Shutdown Recorder Job:' + date);
+	console.log('Shutdown FandC Job:' + date);
+	return shutdownJob;
+}
+
+/* --------------------------------------------------------------------------- */
+
+function scheduleStartup(date) {
+	var shutdownJob = schedule.scheduleJob(date, launchApp);
+	console.log('Startup FandC Job:' + date);
 	return shutdownJob;
 }
 
