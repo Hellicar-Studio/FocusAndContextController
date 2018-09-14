@@ -3,6 +3,9 @@ var express = require('express');
 var app = express();
 var schedule = require('node-schedule');
 var nodeCleanup = require('node-cleanup');
+var moment = require('moment');
+
+var appName = "DiscoverInfrastructure"
 
 /* --------------------------------------------------------------------------- */
 
@@ -11,7 +14,14 @@ pm2.connect(function(err) {
 		console.log(err)
 		process.exit(2);
 	}
+
 	launchApp();
+
+	var now = new Date();
+
+	nowPlus1Minute = moment(now).add(1, 'm').toDate();
+
+	scheduleShutdown(nowPlus1Minute);
 
 	app.listen(1555, function() {
 		console.log('Listening on port 1555!');
@@ -21,8 +31,8 @@ pm2.connect(function(err) {
 nodeCleanup(function (exitCode, signal) {
 	if(signal) {
 		console.log(signal);
-		pm2.delete("DiscoverInfrastructure", function(err) {
-			console.log("Test");
+		pm2.delete(appName, function(err) {
+			console.log(appName + " closed and removed from PM2.");
 		});
 		nodeCleanup.uninstall();
 		return false;
@@ -31,9 +41,17 @@ nodeCleanup(function (exitCode, signal) {
 
 /* --------------------------------------------------------------------------- */
 
+function scheduleShutdown(date) {
+	var shutdownJob = schedule.scheduleJob(date, closeApp);
+	console.log('Shutdown Recorder Job:' + date);
+	return shutdownJob;
+}
+
+/* --------------------------------------------------------------------------- */
+
 function launchApp() {
 	pm2.start({
-		name: "DiscoverInfrastructure",
+		name: appName,
 		script: "coveDebug.app/Contents/MacOS/coveDebug",
 	  	args: 	[
 					"hide-mouse",
@@ -47,8 +65,16 @@ function launchApp() {
 		if(err) {
 			throw err;
 		} else {
-			console.log(proc);
+			// console.log(proc);
 		}
 		pm2.disconnect();
 	});
+}
+
+/* --------------------------------------------------------------------------- */
+
+function closeApp() {
+		pm2.delete(appName, function(err) {
+			console.log(appName + " closed and removed from PM2.");
+		});
 }
